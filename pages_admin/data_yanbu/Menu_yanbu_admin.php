@@ -19,9 +19,16 @@ if ($keyword != "") {
     } elseif ($category == 3) { 
         // Jilid
         $query = "SELECT * FROM yanbu WHERE jilid LIKE '%$keyword%' ORDER BY id DESC";
-
     } elseif ($category == 4) { 
+        // Halaman
+        $query = "SELECT * FROM yanbu WHERE jilid LIKE '%$keyword%' ORDER BY id DESC";
+
+    } elseif ($category == 5) { 
         // Status
+        $query = "SELECT * FROM yanbu WHERE status LIKE '%$keyword%' ORDER BY id DESC";
+
+    } elseif ($category == 6) { 
+        // Nama Ustadz
         $query = "SELECT * FROM yanbu WHERE status LIKE '%$keyword%' ORDER BY id DESC";
     }
 
@@ -40,7 +47,7 @@ $data = $koneksi->query($query);
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Menu Data Yanbu'a<a href=""></a></title>
+    <title>Menu Data Yanbu'a</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -130,6 +137,7 @@ $data = $koneksi->query($query);
     <div class="top-card mb-3">
         <div class="d-flex justify-content-between align-items-center">
 
+
         <a href="?p=tambah_data_yanbu_admin" class="btn-add">
             <i class="fa fa-plus"></i> Tambah Data
         </a>
@@ -143,11 +151,14 @@ $data = $koneksi->query($query);
         <option value="1">Nama</option>
         <option value="2">Kelas</option>
         <option value="3">Jilid</option>
-        <option value="4">Status</option>
+        <option value="4">Halaman</option>
+        <option value="5">Status</option>
+        <option value="6">Nama Ustadz</option>
     </select>
 
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
+
 
     <div class="table-container">
         <table class="table table-hover" id="dataTable">
@@ -156,8 +167,10 @@ $data = $koneksi->query($query);
                     <th>No</th>
                     <th>Nama</th>
                     <th>Kelas</th>
-                    <th>Jilid/Juz</th>
+                    <th>Jilid</th>
+                    <th>Halaman</th>
                     <th>Status</th>
+                    <th>Nama Ustadz</th>
                     <th>Tanggal Input</th>
                     <th>Aksi</th>
                 </tr>
@@ -173,6 +186,7 @@ while ($row = $data->fetch_assoc()) {
         <td><?= $row['nama']; ?></td>
         <td><?= $row['kelas']; ?></td>
         <td><?= $row['jilid']; ?></td>
+        <td><?= $row['halaman']; ?></td>
 
         <td>
             <?php 
@@ -180,6 +194,16 @@ while ($row = $data->fetch_assoc()) {
                     echo "<span class='badge bg-warning text-dark'>Lulus</span>";
                 } elseif ($row['status'] == 'tidak lulus') {
                     echo "<span class='badge bg-secondary'>Tidak Lulus</span>";
+                }
+            ?>
+        </td>
+
+                <td>
+            <?php 
+                if ($row['nama_ustadz'] == 'Arya Surya') {
+                    echo "<span>Arya Surya</span>";
+                } elseif ($row['nama_ustadz'] == 'Fijar Bahi') {
+                    echo "<span>Firja Bahi</span>";
                 }
             ?>
         </td>

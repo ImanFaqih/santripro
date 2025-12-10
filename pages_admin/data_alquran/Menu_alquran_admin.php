@@ -19,9 +19,16 @@ if ($keyword != "") {
     } elseif ($category == 3) { 
         // Jilid
         $query = "SELECT * FROM alquran WHERE jilid LIKE '%$keyword%' ORDER BY id DESC";
-
     } elseif ($category == 4) { 
+        // Halaman
+        $query = "SELECT * FROM alquran WHERE jilid LIKE '%$keyword%' ORDER BY id DESC";
+
+    } elseif ($category == 5) { 
         // Status
+        $query = "SELECT * FROM alquran WHERE status LIKE '%$keyword%' ORDER BY id DESC";
+
+    } elseif ($category == 6) { 
+        // Nama Ustadz
         $query = "SELECT * FROM alquran WHERE status LIKE '%$keyword%' ORDER BY id DESC";
     }
 
@@ -144,7 +151,9 @@ $data = $koneksi->query($query);
         <option value="1">Nama</option>
         <option value="2">Kelas</option>
         <option value="3">Jilid</option>
-        <option value="4">Status</option>
+        <option value="4">Halaman</option>
+        <option value="5">Status</option>
+        <option value="6">Nama Ustadz</option>
     </select>
 
     <button type="submit" class="btn btn-primary">Search</button>
@@ -158,8 +167,10 @@ $data = $koneksi->query($query);
                     <th>No</th>
                     <th>Nama</th>
                     <th>Kelas</th>
-                    <th>Jilid/Juz</th>
+                    <th>Jilid</th>
+                    <th>Halaman</th>
                     <th>Status</th>
+                    <th>Nama Ustadz</th>
                     <th>Tanggal Input</th>
                     <th>Aksi</th>
                 </tr>
@@ -175,6 +186,7 @@ while ($row = $data->fetch_assoc()) {
         <td><?= $row['nama']; ?></td>
         <td><?= $row['kelas']; ?></td>
         <td><?= $row['jilid']; ?></td>
+        <td><?= $row['halaman']; ?></td>
 
         <td>
             <?php 
@@ -182,6 +194,18 @@ while ($row = $data->fetch_assoc()) {
                     echo "<span class='badge bg-warning text-dark'>Lulus</span>";
                 } elseif ($row['status'] == 'tidak lulus') {
                     echo "<span class='badge bg-secondary'>Tidak Lulus</span>";
+                }
+            ?>
+        </td>
+
+                <td>
+            <?php 
+                if ($row['nama_ustadz'] == 'Syafiqul Umam') {
+                    echo "<span>Syafiqul Umam</span>";
+                } elseif ($row['nama_ustadz'] == 'Nazila Umi Syarifah') {
+                    echo "<span>Nazila Umi Syarifah</span>";
+                } elseif ($row['nama_ustadz'] == 'Ariqoh Nadif') {
+                    echo "<span>Ariqoh Nadif</span>";
                 }
             ?>
         </td>

@@ -1,6 +1,26 @@
 <?php
 require '../config.php';
 
+// Hitung total santri per ustadz
+$ustadz_quran = mysqli_query($koneksi, "
+    SELECT nama_ustadz, COUNT(*) AS total
+    FROM alquran
+    GROUP BY nama_ustadz
+");
+
+$ustadz_juz = mysqli_query($koneksi, "
+    SELECT nama_ustadz, COUNT(*) AS total
+    FROM juzama
+    GROUP BY nama_ustadz
+");
+
+$ustadz_yanbu = mysqli_query($koneksi, "
+    SELECT nama_ustadz, COUNT(*) AS total
+    FROM yanbu
+    GROUP BY nama_ustadz
+");
+
+
 
 $total_quran = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM alquran"));
 $lulus_quran = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM alquran WHERE status='lulus'"));
@@ -142,6 +162,47 @@ body:not(.sidebar-open) .app-sidebar {
         </div>
     </div>
   </div>
+
+  <div class="dashboard-cards">
+    <div class="card p-3 shadow-sm" style="grid-column: span 3;">
+    <h5 class="mb-3"><b>Data Ustadz & Jumlah Santri</b></h5>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+
+        <!-- Ustadz Al-Qur'an -->
+        <div style="flex: 1; min-width: 250px;">
+            <h6>Al-Qur'an</h6>
+            <ul>
+                <?php while($u = mysqli_fetch_assoc($ustadz_quran)): ?>
+                    <li><?= $u['nama_ustadz'] ?> — <b><?= $u['total'] ?></b> santri</li>
+                <?php endwhile; ?>
+            </ul>
+        </div>
+
+        <!-- Ustadz Juz Amma -->
+        <div style="flex: 1; min-width: 250px;">
+            <h6>Juz Amma</h6>
+            <ul>
+                <?php while($u = mysqli_fetch_assoc($ustadz_juz)): ?>
+                    <li><?= $u['nama_ustadz'] ?> — <b><?= $u['total'] ?></b> santri</li>
+                <?php endwhile; ?>
+            </ul>
+        </div>
+
+        <!-- Ustadz Yanbu' -->
+        <div style="flex: 1; min-width: 250px;">
+            <h6>Yanbu'</h6>
+            <ul>
+                <?php while($u = mysqli_fetch_assoc($ustadz_yanbu)): ?>
+                    <li><?= $u['nama_ustadz'] ?> — <b><?= $u['total'] ?></b> santri</li>
+                <?php endwhile; ?>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
 
 </div>
 </main>

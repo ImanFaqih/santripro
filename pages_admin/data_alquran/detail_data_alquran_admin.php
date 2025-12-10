@@ -25,8 +25,18 @@
         </tr>
 
         <tr>
+            <th>Halaman</th>
+            <td>$row[halaman]</td>
+        </tr>
+
+        <tr>
             <th>Status</th>
             <td>$row[status]</td>
+        </tr>
+
+        <tr>
+            <th>Nama Ustadz</th>
+            <td>$row[nama_ustadz]</td>
         </tr>
 
         <tr>

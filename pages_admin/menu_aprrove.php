@@ -22,9 +22,9 @@ $data = $koneksi->query("SELECT * FROM approve WHERE approved=0 ORDER BY id DESC
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Jilid/Juz</th>
-                            <th>Status</th>
+                            <th>Halaman</th> <th>Status</th>
                             <th>Kategori</th>
-                            <th>Tanggal</th>
+                            <th>Nama Ustadz</th> <th>Tanggal</th>
                             <th width="180">Aksi</th>
                         </tr>
                     </thead>
@@ -35,8 +35,7 @@ $data = $koneksi->query("SELECT * FROM approve WHERE approved=0 ORDER BY id DESC
                             <td><?= $row['nama'] ?></td>
                             <td><?= $row['kelas'] ?></td>
                             <td><?= $row['jilid'] ?></td>
-
-                            <td>
+                            <td><?= $row['halaman'] ?></td> <td>
                                 <?php if ($row['status'] == 'lulus'): ?>
                                     <span class="badge bg-success">Lulus</span>
                                 <?php else: ?>
@@ -50,23 +49,23 @@ $data = $koneksi->query("SELECT * FROM approve WHERE approved=0 ORDER BY id DESC
                                 <?php elseif ($row['kategori'] == 'alquran'): ?>
                                     <span class="badge bg-info text-dark">Al Qur'an</span>
                                 <?php elseif ($row['kategori'] == 'yanbu'): ?>
-                                    <span class="badge bg-waring text-dark">Yanbu'a</span>
+                                    <span class="badge bg-warning text-dark">Yanbu'a</span>
                                 <?php else: ?>
-                                    <span class="badge bg-succes text-dark">Tidak ada Kategori</span>
+                                    <span class="badge bg-success text-dark">Tidak ada Kategori</span>
                                 <?php endif; ?>
                             </td>
-
-                            <td><?= $row['tanggal'] ?></td>
+                            
+                            <td><?= $row['nama_ustadz'] ?></td> <td><?= $row['tanggal'] ?></td>
 
                             <td>
                                 <a href="approve.php?id=<?= $row['id'] ?>" 
-                                    class="btn btn-success btn-sm me-1">
-                                    <i class="fa fa-check"></i> Terima
+                                    class="btn btn-success btn-sm me-1"
+                                    onclick="return confirm('Yakin ingin menerima data ini?');"> <i class="fa fa-check"></i> Terima
                                 </a>
 
                                 <a href="approve.php?id=<?= $row['id'] ?>&tolak=1" 
-                                    class="btn btn-danger btn-sm">
-                                    <i class="fa fa-times"></i> Tolak
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin ingin menolak data ini?');"> <i class="fa fa-times"></i> Tolak
                                 </a>
                             </td>
 
@@ -75,8 +74,7 @@ $data = $koneksi->query("SELECT * FROM approve WHERE approved=0 ORDER BY id DESC
 
                         <?php if ($data->num_rows == 0): ?>
                         <tr>
-                            <td colspan="7" class="text-center text-muted py-3">
-                                Tidak ada data menunggu approval.
+                            <td colspan="9" class="text-center text-muted py-3"> Tidak ada data menunggu approval.
                             </td>
                         </tr>
                         <?php endif; ?>

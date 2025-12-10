@@ -25,8 +25,18 @@
         </tr>
 
         <tr>
+            <th>Halaman</th>
+            <td>$row[halaman]</td>
+        </tr>
+
+        <tr>
             <th>Status</th>
             <td>$row[status]</td>
+        </tr>
+
+        <tr>
+            <th>Nama Ustadz</th>
+            <td>$row[nama_ustadz]</td>
         </tr>
 
         <tr>
@@ -37,7 +47,6 @@
     ";
     }
     ?>
-  
 
     <a href="?p=data_yanbu_admin" class="btn btn-primary btn-sm">Kembali</a>
 </div>

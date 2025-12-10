@@ -13,13 +13,17 @@ if (isset($_POST['submit'])) {
     $nama   = $_POST['nama'];
     $kelas  = $_POST['kelas'];
     $jilid  = $_POST['jilid'];
+    $halaman = $_POST['halaman'];
     $status = $_POST['status'];
+    $nama_ustadz = $_POST['nama_ustadz'];
 
     $sql = "UPDATE juzama SET 
                 nama='$nama', 
                 kelas='$kelas', 
                 jilid='$jilid', 
-                status='$status' 
+                halaman='$halaman',
+                status='$status',
+                nama_ustadz='$nama_ustadz'
             WHERE id='$id'";
 
     $koneksi->query($sql);
@@ -52,11 +56,29 @@ foreach ($data as $row) {
         </tr>
 
         <tr>
+            <td>Halaman</td>
+            <td>
+                <input type="text" name="halaman" class="form-control" value="<?= $row['halaman'] ?>">
+            </td>
+        </tr>
+
+        <tr>
             <th>Status</th>
             <td>
                 <select name='status' class='form-control' required>
                     <option value='lulus'       <?= $row['status']=='lulus' ? 'selected' : '' ?>>Lulus</option>
                     <option value='tidak lulus' <?= $row['status']=='tidak lulus' ? 'selected' : '' ?>>Tidak Lulus</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Nama Ustadz</td>
+            <td>
+                <select name="nama_ustadz" class="form-control" required>
+                    <option value="">-- pilih ustadz --</option>
+                    <option value="Aziz Febrianto"   <?= $row['nama_ustadz']=='Aziz Febrianto'?'selected':'' ?>>Aziz Febrianto</option>
+                    <option value="Azril Mahendra"  <?= $row['nama_ustadz']=='Azril Mahendra'?'selected':'' ?>>Azril Mahendra</option>
                 </select>
             </td>
         </tr>
@@ -71,5 +93,5 @@ foreach ($data as $row) {
     <?php
 }
 ?>
-    <a href="index.php" class="btn btn-primary btn-sm">Kembali</a>
+    <a href="?p=data_juzama_admin" class="btn btn-primary btn-sm">Kembali</a>
 </form>

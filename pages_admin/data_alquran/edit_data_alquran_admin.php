@@ -13,13 +13,17 @@ if (isset($_POST['submit'])) {
     $nama   = $_POST['nama'];
     $kelas  = $_POST['kelas'];
     $jilid  = $_POST['jilid'];
+    $halaman = $_POST['halaman'];
     $status = $_POST['status'];
+    $nama_ustadz = $_POST['nama_ustadz'];
 
     $sql = "UPDATE alquran SET 
                 nama='$nama', 
                 kelas='$kelas', 
                 jilid='$jilid', 
-                status='$status' 
+                halaman='$halaman',
+                status='$status',
+                nama_ustadz='$nama_ustadz'
             WHERE id='$id'";
 
     $koneksi->query($sql);
@@ -52,11 +56,30 @@ foreach ($data as $row) {
         </tr>
 
         <tr>
+            <td>Halaman</td>
+            <td>
+                <input type="text" name="halaman" class="form-control" value="<?= $row['halaman'] ?>">
+            </td>
+        </tr>
+
+        <tr>
             <th>Status</th>
             <td>
                 <select name='status' class='form-control' required>
                     <option value='lulus'       <?= $row['status']=='lulus' ? 'selected' : '' ?>>Lulus</option>
                     <option value='tidak lulus' <?= $row['status']=='tidak lulus' ? 'selected' : '' ?>>Tidak Lulus</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Nama Ustadz</td>
+            <td>
+                <select name="nama_ustadz" class="form-control" required>
+                    <option value="">-- pilih ustadz --</option>
+                    <option value="Syafiqul Umam"   <?= $row['nama_ustadz']=='Syafiqul Umam'?'selected':'' ?>>Syafiqul Umam</option>
+                    <option value="Nazila Umi Syarifah"  <?= $row['nama_ustadz']=='Nazila Umi Syarifah'?'selected':'' ?>>Nazila Umi Syarifah</option>
+                    <option value="Ariqoh Nadif"  <?= $row['nama_ustadz']=='Ariqoh Nadif'?'selected':'' ?>>Ariqoh Nadif</option>
                 </select>
             </td>
         </tr>
