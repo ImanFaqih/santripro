@@ -200,7 +200,7 @@ while ($row = $data->fetch_assoc()) {
 
                 <td>
             <?php 
-                if ($row['nama_ustadz'] == 'Aziz Febrinto') {
+                if ($row['nama_ustadz'] == 'Aziz Febrianto') {
                     echo "<span>Aziz Febrianto</span>";
                 } elseif ($row['nama_ustadz'] == 'Azril Mahendra') {
                     echo "<span>Azril Mahendra</span>";
